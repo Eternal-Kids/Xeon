@@ -7,7 +7,7 @@ local Camera = Workspace.CurrentCamera
 local LocalPlayer = Players.LocalPlayer
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
-local version = "1.15"
+local version = "1.16"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Zeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -16,7 +16,7 @@ coroutine.wrap(function()
         FpsWm:Text("fps: " .. library.fps)
     end
 end)()
-library.title = "Zeon by EKid01 v1.15"
+library.title = "Zeon by EKid01 v1.16"
 Notif:Notify("Loading a zeon...", 3, "alert")
 
 local silentAimActive = false
@@ -220,13 +220,21 @@ local CrossbowSkin = SkinTab:NewSelector("Crossbow", "None", {"Pixel Crossbow", 
     skinlib:change("Crossbow", skin)
 end)
 SkinTab:NewLabel("Secondary", "center")
-local HandGunSkin = SkinTab:NewSelector("Handgun", "None", {"Pixel Handgun", "Blaster", "Gingerbread Handgun", "Pumpkin Handgun"}, function(skin)
+local HandGunSkin = SkinTab:NewSelector("Handgun", "None", {"Pixel Handgun", "Blaster", "Gingerbread Handgun", "Pumpkin Handgun", "Chainsaw"}, function(skin)
     skinlib:change("Handgun", skin)
 end)
+local RevolverSkin = SkinTab:NewSelector("Revolver", "None", {"Boneclaw Revolver", ""}, function(skin)
+    skinlib:change("Revolver", skin)
+end)
 SkinTab:NewLabel("Melee", "center")
+local KatanaSkin = SkinTab:NewSelector("Katana", "None", {"Pixel Katana", "Saber", "2025 Katana"}, function(skin)
+    skinlib:change("Katana", skin)
+end)
+local KnifeSkin = SkinTab:NewSelector("Knife", "None", {"Candy Cane", "Karambit", "Chancla", "Machete", "Invisible"}, function(skin)
+    skinlib:change("Knife", skin)
+end)
 SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
 SkinTab:NewLabel("Use skinlib by EKid01", "left")
-
 
 Notif:Notify("Zeona has loaded! (All modules)", 4, "success")
