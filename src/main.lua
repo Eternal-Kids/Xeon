@@ -5,9 +5,10 @@ local Workspace = game:GetService("Workspace")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Camera = Workspace.CurrentCamera
 local LocalPlayer = Players.LocalPlayer
+local Lighting = game:GetService("Lighting")
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
-local version = "1.16"
+local version = "1.17"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Zeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -16,7 +17,7 @@ coroutine.wrap(function()
         FpsWm:Text("fps: " .. library.fps)
     end
 end)()
-library.title = "Zeon by EKid01 v1.16"
+library.title = "Zeon by EKid01 v1.17"
 Notif:Notify("Loading a zeon...", 3, "alert")
 
 local silentAimActive = false
@@ -118,6 +119,59 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
+function GetPlayerViewModels()
+    if workspace:FindFirstChild("ViewModels") then
+        local ViewModelsObject = workspace.ViewModels
+        if ViewModelsObject.FirstPerson:GetChildren()[1] ~= nil then
+            local PlayerViewModels = ViewModelsObject.FirstPerson:GetChildren()[1]
+            return PlayerViewModels
+        else
+            return nil
+        end
+    else
+        return nil
+    end
+end
+
+function MakeWorldReflectance(value)
+    for _, obj : Part in game:GetDescendants() do
+        if true then
+            pcall(function()
+                if obj.Reflectance == 0 then
+                    obj.Reflectance = 1
+                end
+            end)
+        else
+            pcall(function()
+                obj.Reflectance = 0
+            end)
+        end
+    end
+end
+
+function ChangeWorldColor(value)
+    while task.wait(.1) do
+        Lighting.Ambient = Color3.fromRGB(0, 0, 0)
+        Lighting.ClockTime = 0
+    end
+end
+
+function CustomGunMaterial()
+    while task.wait(.1) do
+        local PlayerViewModels = GetPlayerViewModels()
+        if PlayerViewModels ~= nil then
+            if true then
+                for _, obj in PlayerViewModels:GetDescendants() do
+                    if obj:IsA("MeshPart") or obj:IsA("Part") or obj:IsA("UnionOperation") then
+                        obj.Material = "Neon"
+                        obj.Color = Color3.fromRGB(255, 0, 0)
+                    end
+                end
+            end
+        end
+    end
+end
+
 local activeWeapons = {} local playerName = game:GetService("Players").LocalPlayer.Name local assetFolder = game:GetService("Players").LocalPlayer.PlayerScripts.Assets.ViewModels local skinlib = {}
 function skinlib:change(normalWeaponName, skinName)
     if not normalWeaponName then return end
@@ -200,6 +254,13 @@ VisualTab:NewLabel("Fun", "center")
 local SkyboxA = VisualTab:NewToggle("Meme Skybox", false, function(value)
     Notif:Notify("Skybox in dev", 4, "error")
 end)
+local NeonAVisual = VisualTab:NewButton("Neon Weapon", function(value)
+    CustomGunMaterial()
+end)
+local NightVisual = VisualTab:NewButton("Night", function(value)
+    MakeWorldReflectance()
+    ChangeWorldColor()
+end)
 
 PlayerTab:NewLabel("Player", "center")
 PlayerTab:NewLabel("Press P to activate fly!", "left")
@@ -237,4 +298,4 @@ SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
 SkinTab:NewLabel("Use skinlib by EKid01", "left")
 
-Notif:Notify("Zeona has loaded! (All modules)", 4, "success")
+Notif:Notify("Zeona has loaded! Version 1.17", 4, "success")
