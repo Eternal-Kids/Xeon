@@ -8,7 +8,7 @@ local LocalPlayer = Players.LocalPlayer
 local Lighting = game:GetService("Lighting")
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
-local version = "1.17"
+local version = "1.171"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Zeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -17,7 +17,7 @@ coroutine.wrap(function()
         FpsWm:Text("fps: " .. library.fps)
     end
 end)()
-library.title = "Zeon by EKid01 v1.17"
+library.title = "Zeon by EKid01 v"..version
 Notif:Notify("Loading a zeon...", 3, "alert")
 
 local silentAimActive = false
@@ -138,12 +138,12 @@ function MakeWorldReflectance(value)
         if true then
             pcall(function()
                 if obj.Reflectance == 0 then
-                    obj.Reflectance = 1
+                    obj.Reflectance = 0.15
                 end
             end)
         else
             pcall(function()
-                obj.Reflectance = 0
+                obj.Reflectance = 0.15
             end)
         end
     end
