@@ -771,10 +771,10 @@ function library:Introduction()
     hashLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     hashLogo.BackgroundTransparency = 1.000
     hashLogo.Position = UDim2.new(0.5, 0, 0.5, 0)
-    hashLogo.Size = UDim2.new(0, 150, 0, 150)
+    hashLogo.Size = UDim2.new(0, 250, 0, 250)
     hashLogo.Visible = true
     hashLogo.Image = "http://www.roblox.com/asset/?id=136858215288786"
-    hashLogo.ImageColor3 = Color3.fromRGB(159, 115, 255)
+    hashLogo.ImageColor3 = Color3.fromRGB(255, 255, 255)
     hashLogo.ImageTransparency = 1
     
     xsx.Name = "xsx"
