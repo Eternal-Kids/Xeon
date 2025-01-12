@@ -1,3 +1,22 @@
+--[[
+    Xeon by EKid (discord: ekid.dev)
+    Please dont fork whithout credit me
+    Sorry bungie#0001 i am just moded lib!
+]]
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))() -- Ps by EKid: This is saved version of lib!
+local version = "1.18"
+local Notif = library:InitNotifications()
+local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
+local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
+local rankchecker_name = library:GetUsername()
+coroutine.wrap(function()
+    while wait(.75) do
+        FpsWm:Text("fps: " .. library.fps)
+    end
+end)()
+library.rank = "Guest"
+Notif:Notify("Loading a xeon...", 3, "alert")
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -7,32 +26,21 @@ local Camera = Workspace.CurrentCamera
 local LocalPlayer = Players.LocalPlayer
 local Lighting = game:GetService("Lighting")
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))() -- Ps by EKid: This is saved version of lib!
-local version = "1.1721"
-local Notif = library:InitNotifications()
-local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
-local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
-coroutine.wrap(function()
-    while wait(.75) do
-        FpsWm:Text("fps: " .. library.fps)
-    end
-end)()
-library.title = "Xeon by EKid01 v"..version
-Notif:Notify("Loading a xeon...", 3, "alert")
+-- rank database (luaobfuscator)
+local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9) local v10={};for v11=1, #v8 do v6(v10,v0(v4(v1(v2(v8,v11,v11 + 1 )),v1(v2(v9,1 + (v11% #v9) ,1 + (v11% #v9) + 1 )))%256 ));end return v5(v10);end if (rankchecker_name==v7("\225\219\242\61\194\163\232\6\227\219\250\61\213","\126\177\163\187\69\134\219\167")) then library.rank=v7("\7\200\60","\156\67\173\74\165");elseif (rankchecker_name==v7("\19\152\99\57\166\41\80\96\229","\38\84\215\41\118\220\70")) then library.rank=v7("\116\19\52","\158\48\118\66\114");elseif (rankchecker_name==v7("\140\11\57\18\82\159\212\157\117\72","\155\203\68\112\86\19\197")) then library.rank=v7("\98\212\55\241\79\118\225","\152\38\189\86\156\32\24\133");end
 
 local silentAimActive = false
-local esp = loadstring(game:HttpGet('https://raw.githubusercontent.com/0f76/seere_v3/main/ESP/v3_esp.lua'))()
+local skinAcess = false
+if library.rank == "Dev" then
+    Notif:Notify("Now you are dev", 3, "alert")
+    skinAcess = true
+elseif library.rank == "Diamond" then
+    Notif:Notify("You gifted a diamond subscripe!", 3, "alert")
+    skinAcess = true
+end
+
+local esp = loadstring(game:HttpGet('https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/esp.lua'))()
 esp.enabled = false
-esp.teamcheck = false
-esp.outlines = true
-esp.shortnames = true
-esp.team_boxes = {true,Color3.fromRGB(255,255,255),Color3.fromRGB(1,1,1),0}
-esp.team_chams = {true,Color3.fromRGB(255, 255, 255),Color3.fromRGB(138, 139, 194),.25,.75,true}
-esp.team_names = {true,Color3.fromRGB(255,255,255)}
-esp.team_healthbar = {true, Color3.new(0,255,0), Color3.new(255,0,0)}
-esp.team_arrow = {false, Color3.new(255,255,255), 0.5}
-esp.team_distance = true
-esp.team_health = true
  
 local noClip = false
 
@@ -66,9 +74,9 @@ local Humanoid = Character:WaitForChild("Humanoid")
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
 local flying = false
-local flySpeed = 100 --Set up it to for yourself
-local maxFlySpeed = 1000 --Set up it to for yourself
-local speedIncrement = 0.4 --Set up it to for yourself
+local flySpeed = 100
+local maxFlySpeed = 1000
+local speedIncrement = 0.4
 local originalGravity = workspace.Gravity
 
 LocalPlayer.CharacterAdded:Connect(function(newCharacter) 
@@ -106,7 +114,7 @@ local function fly()
 end
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if not gameProcessed and input.KeyCode == Enum.KeyCode.P then
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.X then
         flying = not flying
         if flying then
             workspace.Gravity = 0 
@@ -229,6 +237,8 @@ end
 end
 end)
 
+
+library.title = "Xeon by EKid01 v"..version .." | " ..library.rank
 library:Introduction()
 wait(0.1)
 local Init = library:Init()
@@ -237,6 +247,15 @@ local AimTab = Init:NewTab("Aim")
 local VisualTab = Init:NewTab("Visual")
 local SkinTab = Init:NewTab("Skinchanger")
 local PlayerTab = Init:NewTab("Player")
+
+if library.rank == "Dev" then
+    local DeletedPage = Init:NewTab("Deleted Tab")
+    local ExpFunctions = Init:NewTab("Experement. Func`s")
+
+    local NeonAVisual = DeletedPage:NewButton("Neon Weapon", function(value)
+        CustomGunMaterial()
+    end) -- Banned by "not used func"
+end
 
 AimTab:NewLabel("Aim", "center")
 local SilentAimToggle = AimTab:NewToggle("Enable", false, function(value)
@@ -254,9 +273,6 @@ VisualTab:NewLabel("Fun", "center")
 local SkyboxA = VisualTab:NewToggle("Meme Skybox", false, function(value)
     Notif:Notify("Skybox in dev", 4, "error")
 end)
-local NeonAVisual = VisualTab:NewButton("Neon Weapon", function(value)
-    CustomGunMaterial()
-end)
 local NightVisual = VisualTab:NewButton("Night", function(value)
     MakeWorldReflectance()
     ChangeWorldColor()
@@ -270,6 +286,8 @@ end)
 local NoclipToggle = PlayerTab:NewToggle("Noclip", false, function(value)
     setNoClip(not noClip)
 end)
+
+if skinAcess == true then
 SkinTab:NewLabel("Primary", "center")
 local ARSkin = SkinTab:NewSelector("Assault Rifle", "None", {"AK-47", "AKEY-47", "Boneclaw Rifle"}, function(skin)
     skinlib:change("Assault Rifle", skin)
@@ -297,5 +315,8 @@ end)
 SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
 SkinTab:NewLabel("Use skinlib by EKid01", "left")
+else
+SkinTab:NewLabel("Skinchanger allowed only Silver +", "left")
+end
 
 Notif:Notify("Xeon is loaded! Version "..version, 4, "success")
