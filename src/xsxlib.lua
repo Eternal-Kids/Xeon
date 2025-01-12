@@ -5,6 +5,7 @@
     problem with other people using it, please just make sure you message me and ask me before using.
 
   PS by EKid: I am saved the lib version!
+  sorry bungie(
 ]]
 
 -- / Locals
