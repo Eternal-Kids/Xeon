@@ -1,5 +1,5 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))()
-
+-- Dont crack
 
 SkinTab:NewLabel("Primary", "center")
 local ARSkin = SkinTab:NewSelector("Assault Rifle", "None", {"AK-47", "AKEY-47", "Boneclaw Rifle"}, function(skin)
