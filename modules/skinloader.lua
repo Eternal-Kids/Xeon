@@ -1,5 +1,6 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))()
 -- Dont crack
+local Init = library:Init()
 local SkinTab = Init:NewTab("Skinchanger")
 
 SkinTab:NewLabel("Primary", "center")
