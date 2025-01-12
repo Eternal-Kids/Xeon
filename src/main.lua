@@ -8,17 +8,17 @@ local LocalPlayer = Players.LocalPlayer
 local Lighting = game:GetService("Lighting")
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
-local version = "1.171"
+local version = "1.172"
 local Notif = library:InitNotifications()
-local Wm = library:Watermark("Zeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
+local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
 coroutine.wrap(function()
     while wait(.75) do
         FpsWm:Text("fps: " .. library.fps)
     end
 end)()
-library.title = "Zeon by EKid01 v"..version
-Notif:Notify("Loading a zeon...", 3, "alert")
+library.title = "Xeon by EKid01 v"..version
+Notif:Notify("Loading a xeon...", 3, "alert")
 
 local silentAimActive = false
 local esp = loadstring(game:HttpGet('https://raw.githubusercontent.com/0f76/seere_v3/main/ESP/v3_esp.lua'))()
@@ -298,4 +298,4 @@ SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
 SkinTab:NewLabel("Use skinlib by EKid01", "left")
 
-Notif:Notify("Zeona has loaded! Version 1.17", 4, "success")
+Notif:Notify("Xeon is loaded! Version "..version, 4, "success")
