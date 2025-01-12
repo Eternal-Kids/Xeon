@@ -82,7 +82,7 @@ local drag = function(obj, latency)
 end
 
 local library = {
-    version = "2.0.2",
+    version = "2.0.2 Moded by EKid",
     title = title or "xsx " .. tostring(math.random(1,366)),
     fps = 0,
     rank = "private"
@@ -795,7 +795,7 @@ function library:Introduction()
     text.Position = UDim2.new(0.912751675, 0, 0, 0)
     text.Size = UDim2.new(0, 26, 0, 21)
     text.Font = Enum.Font.Code
-    text.Text = "by hash"
+    text.Text = "by hash     "
     text.TextColor3 = Color3.fromRGB(124, 124, 124)
     text.TextSize = 10.000
     text.TextTransparency = 1
