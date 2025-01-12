@@ -1,3 +1,6 @@
+local colourChosen = Color3.fromRGB(255, 0, 0)
+_G.ESPToggle = false
+
 local function getCharacter(player)
     return Workspace:FindFirstChild(player.Name)
 end
