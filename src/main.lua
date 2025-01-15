@@ -1,5 +1,5 @@
 --[[
-    Xeon by EKid (discord: tinytosha)
+    Xeon by EKid (discord: ekid.dev)
     Please dont fork whithout credit me
     Sorry bungie#0001 i am just moded lib!
 ]]
@@ -66,7 +66,7 @@ else
 end
 
 -- rank database (luaobfuscator)
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9) local v10={};for v11=1, #v8 do v6(v10,v0(v4(v1(v2(v8,v11,v11 + 1 )),v1(v2(v9,1 + (v11% #v9) ,1 + (v11% #v9) + 1 )))%256 ));end return v5(v10);end if (rankchecker_name==v7("\225\219\242\61\194\163\232\6\227\219\250\61\213","\126\177\163\187\69\134\219\167")) then library.rank=v7("\7\200\60","\156\67\173\74\165");elseif (rankchecker_name==v7("\19\152\99\57\166\41\80\96\229","\38\84\215\41\118\220\70")) then library.rank=v7("\116\19\52","\158\48\118\66\114");elseif (rankchecker_name==v7("\140\11\57\18\82\159\212\157\117\72","\155\203\68\112\86\19\197")) then library.rank=v7("\98\212\55\241\79\118\225","\152\38\189\86\156\32\24\133");elseif (rankchecker_name==v7("\219\120\142\98\221\109\136\112\173\0","\38\156\55\199")) then library.rank=v7("\140\116\125\37\28\122\254","\35\200\29\28\72\115\20\154");end
+local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9) local v10={};for v11=1, #v8 do v6(v10,v0(v4(v1(v2(v8,v11,v11 + 1 )),v1(v2(v9,1 + (v11% #v9) ,1 + (v11% #v9) + 1 )))%256 ));end return v5(v10);end if (rankchecker_name==v7("\225\219\242\61\194\163\232\6\227\219\250\61\213","\126\177\163\187\69\134\219\167")) then library.rank=v7("\7\200\60","\156\67\173\74\165");elseif (rankchecker_name==v7("\19\152\99\57\166\41\80\96\229","\38\84\215\41\118\220\70")) then library.rank=v7("\116\19\52","\158\48\118\66\114");elseif (rankchecker_name==v7("\140\11\57\18\82\159\212\157\117\72","\155\203\68\112\86\19\197")) then library.rank=v7("\98\212\55\241\79\118\225","\152\38\189\86\156\32\24\133");elseif (rankchecker_name==v7("\219\120\142\98\221\109\136\112\173\1","\38\156\55\199")) then library.rank=v7("\140\116\125\37\28\122\254","\35\200\29\28\72\115\20\154");end
 
 local skinAcess = false
 if library.rank == "Dev" then
