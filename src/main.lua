@@ -1,10 +1,10 @@
 --[[
-    Xeon by EKid (discord: ekid.dev)
+    Xeon by EKid (discord: tinytosha)
     Please dont fork whithout credit me
     Sorry bungie#0001 i am just moded lib!
 ]]
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))() -- Ps by EKid: This is saved version of lib!
-local version = "1.18"
+local version = "1.2"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -25,11 +25,49 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Camera = Workspace.CurrentCamera
 local LocalPlayer = Players.LocalPlayer
 local Lighting = game:GetService("Lighting")
+local HttpService = game:GetService("HttpService")
+
+--config
+local config_beta = {
+    Aim = {
+        enabled = false,
+    },
+    Visual = {
+        esp = false,
+        night = false,
+    },
+    Skins = {
+        Assault_Rifle = "none",
+        Sniper = "none",
+        Crossbow = "none",
+        Handgun = "none",
+        Revolver = "none",
+        Knife = "none",
+        Katana = "none",
+    },
+    Other = {
+        ver = 1,
+    },
+}
+
+makefolder("Xeon")
+if isfile("Xeon/config.json") then
+    local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
+    if Config.Other.ver == config_beta.Other.ver then
+    else
+        local jsonString = HttpService:JSONEncode(config_beta)
+        local Config = writefile("Xeon/config.json", jsonString)
+        Notif:Notify("You config is old", 4, "error")
+    end
+else
+    local jsonString = HttpService:JSONEncode(config_beta)
+    local Config = writefile("Xeon/config.json", jsonString)
+    
+end
 
 -- rank database (luaobfuscator)
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9) local v10={};for v11=1, #v8 do v6(v10,v0(v4(v1(v2(v8,v11,v11 + 1 )),v1(v2(v9,1 + (v11% #v9) ,1 + (v11% #v9) + 1 )))%256 ));end return v5(v10);end if (rankchecker_name==v7("\225\219\242\61\194\163\232\6\227\219\250\61\213","\126\177\163\187\69\134\219\167")) then library.rank=v7("\7\200\60","\156\67\173\74\165");elseif (rankchecker_name==v7("\19\152\99\57\166\41\80\96\229","\38\84\215\41\118\220\70")) then library.rank=v7("\116\19\52","\158\48\118\66\114");elseif (rankchecker_name==v7("\140\11\57\18\82\159\212\157\117\72","\155\203\68\112\86\19\197")) then library.rank=v7("\98\212\55\241\79\118\225","\152\38\189\86\156\32\24\133");end
+local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9) local v10={};for v11=1, #v8 do v6(v10,v0(v4(v1(v2(v8,v11,v11 + 1 )),v1(v2(v9,1 + (v11% #v9) ,1 + (v11% #v9) + 1 )))%256 ));end return v5(v10);end if (rankchecker_name==v7("\225\219\242\61\194\163\232\6\227\219\250\61\213","\126\177\163\187\69\134\219\167")) then library.rank=v7("\7\200\60","\156\67\173\74\165");elseif (rankchecker_name==v7("\19\152\99\57\166\41\80\96\229","\38\84\215\41\118\220\70")) then library.rank=v7("\116\19\52","\158\48\118\66\114");elseif (rankchecker_name==v7("\140\11\57\18\82\159\212\157\117\72","\155\203\68\112\86\19\197")) then library.rank=v7("\98\212\55\241\79\118\225","\152\38\189\86\156\32\24\133");elseif (rankchecker_name==v7("\219\120\142\98\221\109\136\112\173\0","\38\156\55\199")) then library.rank=v7("\140\116\125\37\28\122\254","\35\200\29\28\72\115\20\154");end
 
-local silentAimActive = false
 local skinAcess = false
 if library.rank == "Dev" then
     Notif:Notify("Now you are dev", 3, "alert")
@@ -39,8 +77,17 @@ elseif library.rank == "Diamond" then
     skinAcess = true
 end
 
+local silentAimActive = false
 local esp = loadstring(game:HttpGet('https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/esp.lua'))()
 esp.enabled = false
+
+if true then
+    local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
+    
+    silentAimActive = Config.Aim.enabled
+    esp.enabled = Config.Visual.esp
+end
+
  
 local noClip = false
 
@@ -90,6 +137,7 @@ local function randomizeValue(value, range)
 end
 
 local function fly()
+    
     while flying do
         local MoveDirection = Vector3.new()
         local cameraCFrame = workspace.CurrentCamera.CFrame
@@ -118,11 +166,10 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         flying = not flying
         if flying then
             workspace.Gravity = 0 
-            fly() 
+            fly()
         else
-            flySpeed = 100 
             HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
-            workspace.Gravity = originalGravity
+            workspace.Gravity = originalGravity    
         end
     end
 end)
@@ -164,6 +211,7 @@ function ChangeWorldColor(value)
     end
 end
 
+
 function CustomGunMaterial()
     while task.wait(.1) do
         local PlayerViewModels = GetPlayerViewModels()
@@ -201,6 +249,38 @@ function skinlib:change(normalWeaponName, skinName)
         end
     else
         activeWeapons[normalWeaponName] = nil
+    end
+end
+
+if library.rank == "Dev" then
+    local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
+    if Config.Skins.Sniper == "none" then 
+    else 
+        skinlib:change("Sniper", Config.Skins.Sniper) 
+    end
+    if Config.Skins.Assault_Rifle == "none" then 
+    else 
+        skinlib:change("Assault Rifle", Config.Skins.Assault_Rifle) 
+    end
+    if Config.Skins.Crossbow == "none" then
+    else 
+        skinlib:change("Crossbow", Config.Skins.Crossbow) 
+    end
+    if Config.Skins.Handgun == "none" then
+    else 
+        skinlib:change("Handgun", Config.Skins.Handgun) 
+    end
+    if Config.Skins.Revolver == "none" then 
+    else 
+        skinlib:change("Revolver", Config.Skins.Revolver) 
+    end
+    if Config.Skins.Katana == "none" then 
+    else 
+        skinlib:change("Katana", Config.Skins.Katana) 
+    end
+    if Config.Skins.Knife == "none" then 
+    else 
+        skinlib:change("Knife", Config.Skins.Knife) 
     end
 end
 
@@ -260,11 +340,19 @@ end
 AimTab:NewLabel("Aim", "center")
 local SilentAimToggle = AimTab:NewToggle("Enable", false, function(value)
     silentAimActive = value
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json"))
+    read.Aim.enabled = value
+    local jsonString = HttpService:JSONEncode(read)
+    writefile("Xeon/config.json", jsonString)
 end)
 
 VisualTab:NewLabel("ESP", "center")
 local ESPToggle = VisualTab:NewToggle("Enable", false, function(value)
     esp.enabled = value
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json"))
+    read.Visual.esp = value
+    local jsonString = HttpService:JSONEncode(read)
+    writefile("Xeon/config.json", jsonString)
 end)
 local ESP_ArrowsToggle = VisualTab:NewToggle("Arrows", false, function(value)
     esp.team_arrow = {value, Color3.new(255,255,255), 0.5}
@@ -273,13 +361,14 @@ VisualTab:NewLabel("Fun", "center")
 local SkyboxA = VisualTab:NewToggle("Meme Skybox", false, function(value)
     Notif:Notify("Skybox in dev", 4, "error")
 end)
-local NightVisual = VisualTab:NewButton("Night", function(value)
+local NightVisual = VisualTab:NewToggle("Night (Rejoin to disible)", false, function(value)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Visual.night = value local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
+
     MakeWorldReflectance()
     ChangeWorldColor()
 end)
-
 PlayerTab:NewLabel("Player", "center")
-PlayerTab:NewLabel("Press P to activate fly!", "left")
+PlayerTab:NewLabel("Press X to activate fly!", "left")
 local Slider1 = PlayerTab:NewSlider("Flying Speed", "", true, "/", {min = 50, max = 1000, default = 100}, function(value)
     flySpeed = value
 end)
@@ -291,26 +380,33 @@ if skinAcess == true then
 SkinTab:NewLabel("Primary", "center")
 local ARSkin = SkinTab:NewSelector("Assault Rifle", "None", {"AK-47", "AKEY-47", "Boneclaw Rifle"}, function(skin)
     skinlib:change("Assault Rifle", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Assault_Rifle = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
-local SniperSkin = SkinTab:NewSelector("Sniper", "None", {"Pixel Sniper", "Keyper", "Gingerbread Sniper", "Hyper Sniper"}, function(skin)
+local SniperSkin = SkinTab:NewSelector("Sniper", "None", {"Pixel Sniper", "Keyper", "Gingerbread Sniper", "Hyper Sniper", "Sniper"}, function(skin)
     skinlib:change("Sniper", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Sniper = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
-local CrossbowSkin = SkinTab:NewSelector("Crossbow", "None", {"Pixel Crossbow", "Frosty Crossbow"}, function(skin)
+local CrossbowSkin = SkinTab:NewSelector("Crossbow", "None", {"Pixel Crossbow", "Frostbite Crossbow"}, function(skin)
     skinlib:change("Crossbow", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Crossbow = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
 SkinTab:NewLabel("Secondary", "center")
 local HandGunSkin = SkinTab:NewSelector("Handgun", "None", {"Pixel Handgun", "Blaster", "Gingerbread Handgun", "Pumpkin Handgun", "Chainsaw"}, function(skin)
     skinlib:change("Handgun", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Handgun = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
 local RevolverSkin = SkinTab:NewSelector("Revolver", "None", {"Boneclaw Revolver", ""}, function(skin)
     skinlib:change("Revolver", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Revolver = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
 SkinTab:NewLabel("Melee", "center")
 local KatanaSkin = SkinTab:NewSelector("Katana", "None", {"Pixel Katana", "Saber", "2025 Katana"}, function(skin)
     skinlib:change("Katana", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Katana = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
 local KnifeSkin = SkinTab:NewSelector("Knife", "None", {"Candy Cane", "Karambit", "Chancla", "Machete", "Invisible"}, function(skin)
     skinlib:change("Knife", skin)
+    local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Skins.Knife = skin local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 end)
 SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
@@ -320,3 +416,11 @@ SkinTab:NewLabel("Skinchanger allowed only Silver +", "left")
 end
 
 Notif:Notify("Xeon is loaded! Version "..version, 4, "success")
+
+if true then
+    local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
+    if Config.Visual.night == true then
+        MakeWorldReflectance()
+        ChangeWorldColor()
+    end
+end
