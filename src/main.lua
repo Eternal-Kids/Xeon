@@ -1,10 +1,10 @@
 --[[
-    Xeon by EKid (discord: ekid.dev)
+    Xeon by EKid (discord: tinytosha)
     Please dont fork whithout credit me
     Sorry bungie#0001 i am just moded lib!
 ]]
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))() -- Ps by EKid: This is saved version of lib!
-local version = "1.2"
+local version = "1.25"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -46,7 +46,9 @@ local config_beta = {
         Katana = "none",
     },
     Other = {
-        ver = 1,
+        ver = 2,
+        gamever = version,
+        
     },
 }
 
@@ -65,17 +67,34 @@ else
     
 end
 
--- rank database (luaobfuscator)
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v8,v9) local v10={};for v11=1, #v8 do v6(v10,v0(v4(v1(v2(v8,v11,v11 + 1 )),v1(v2(v9,1 + (v11% #v9) ,1 + (v11% #v9) + 1 )))%256 ));end return v5(v10);end if (rankchecker_name==v7("\225\219\242\61\194\163\232\6\227\219\250\61\213","\126\177\163\187\69\134\219\167")) then library.rank=v7("\7\200\60","\156\67\173\74\165");elseif (rankchecker_name==v7("\19\152\99\57\166\41\80\96\229","\38\84\215\41\118\220\70")) then library.rank=v7("\116\19\52","\158\48\118\66\114");elseif (rankchecker_name==v7("\140\11\57\18\82\159\212\157\117\72","\155\203\68\112\86\19\197")) then library.rank=v7("\98\212\55\241\79\118\225","\152\38\189\86\156\32\24\133");elseif (rankchecker_name==v7("\219\120\142\98\221\109\136\112\173\1","\38\156\55\199")) then library.rank=v7("\140\116\125\37\28\122\254","\35\200\29\28\72\115\20\154");end
+local rankdatabase = {
+    Dev = {"drrrxzov12"},
+    User = {"GOIDAZOV16", "GOIDAZOV18"}
+}
+
+
+function checkPlayerRank(playerName)
+    for role, players in pairs(rankdatabase) do
+        for _, name in ipairs(players) do
+            if name == playerName then
+                library.rank = role -- Устанавливаем роль игрока
+                return
+            end
+        end
+    end
+end
+
+checkPlayerRank(LocalPlayer.name)
 
 local skinAcess = false
 if library.rank == "Dev" then
-    Notif:Notify("Now you are dev", 3, "alert")
+    Notif:Notify("Now you dev", 3, "alert")
     skinAcess = true
-elseif library.rank == "Diamond" then
-    Notif:Notify("You gifted a diamond subscripe!", 3, "alert")
+elseif library.rank == "User" then
+    Notif:Notify("You now user", 3, "alert")
     skinAcess = true
 end
+
 
 local silentAimActive = false
 local esp = loadstring(game:HttpGet('https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/esp.lua'))()
@@ -188,7 +207,7 @@ function GetPlayerViewModels()
     end
 end
 
-function MakeWorldReflectance(value)
+function MakeNight()
     for _, obj : Part in game:GetDescendants() do
         if true then
             pcall(function()
@@ -202,15 +221,11 @@ function MakeWorldReflectance(value)
             end)
         end
     end
-end
-
-function ChangeWorldColor(value)
-    while task.wait(.1) do
+    while wait(0.25) do
         Lighting.Ambient = Color3.fromRGB(0, 0, 0)
         Lighting.ClockTime = 0
     end
 end
-
 
 function CustomGunMaterial()
     while task.wait(.1) do
@@ -252,36 +267,15 @@ function skinlib:change(normalWeaponName, skinName)
     end
 end
 
-if library.rank == "Dev" then
+if skinAcess == true then
     local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
-    if Config.Skins.Sniper == "none" then 
-    else 
-        skinlib:change("Sniper", Config.Skins.Sniper) 
-    end
-    if Config.Skins.Assault_Rifle == "none" then 
-    else 
-        skinlib:change("Assault Rifle", Config.Skins.Assault_Rifle) 
-    end
-    if Config.Skins.Crossbow == "none" then
-    else 
-        skinlib:change("Crossbow", Config.Skins.Crossbow) 
-    end
-    if Config.Skins.Handgun == "none" then
-    else 
-        skinlib:change("Handgun", Config.Skins.Handgun) 
-    end
-    if Config.Skins.Revolver == "none" then 
-    else 
-        skinlib:change("Revolver", Config.Skins.Revolver) 
-    end
-    if Config.Skins.Katana == "none" then 
-    else 
-        skinlib:change("Katana", Config.Skins.Katana) 
-    end
-    if Config.Skins.Knife == "none" then 
-    else 
-        skinlib:change("Knife", Config.Skins.Knife) 
-    end
+    if Config.Skins.Sniper == "none" then else skinlib:change("Sniper", Config.Skins.Sniper) end
+    if Config.Skins.Assault_Rifle == "none" then else skinlib:change("Assault Rifle", Config.Skins.Assault_Rifle) end
+    if Config.Skins.Crossbow == "none" then else skinlib:change("Crossbow", Config.Skins.Crossbow) end
+    if Config.Skins.Handgun == "none" then else skinlib:change("Handgun", Config.Skins.Handgun) end
+    if Config.Skins.Revolver == "none" then else skinlib:change("Revolver", Config.Skins.Revolver) end
+    if Config.Skins.Knife == "none" then else skinlib:change("Knife", Config.Skins.Knife) end
+    if Config.Skins.Katana == "none" then else skinlib:change("Katana", Config.Skins.Katana) end
 end
 
 local function getNearestHead()
@@ -364,8 +358,7 @@ end)
 local NightVisual = VisualTab:NewToggle("Night (Rejoin to disible)", false, function(value)
     local read = HttpService:JSONDecode(readfile("Xeon/config.json")) read.Visual.night = value local jsonString = HttpService:JSONEncode(read) writefile("Xeon/config.json", jsonString)
 
-    MakeWorldReflectance()
-    ChangeWorldColor()
+    MakeNight()
 end)
 PlayerTab:NewLabel("Player", "center")
 PlayerTab:NewLabel("Press X to activate fly!", "left")
@@ -412,15 +405,13 @@ SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
 SkinTab:NewLabel("Use skinlib by EKid01", "left")
 else
-SkinTab:NewLabel("Skinchanger allowed only Silver +", "left")
+SkinTab:NewLabel("Skinchanger allowed only users", "left")
 end
 
 Notif:Notify("Xeon is loaded! Version "..version, 4, "success")
 
-if true then
-    local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
+if true then local Config = HttpService:JSONDecode(readfile("Xeon/config.json"))
     if Config.Visual.night == true then
-        MakeWorldReflectance()
-        ChangeWorldColor()
+        MakeNight()
     end
 end
