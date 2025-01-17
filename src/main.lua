@@ -67,13 +67,17 @@ else
     
 end
 
-local rankdatabase = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/database.lua"))() 
+local rankdatabase = {
+    Dev = {"drrrxzov13"},
+    User = {"GOIDAZOV16", "GOIDAZOV18"}
+}
+
 
 function checkPlayerRank(playerName)
     for role, players in pairs(rankdatabase) do
         for _, name in ipairs(players) do
             if name == playerName then
-                library.rank = role
+                library.rank = role -- Устанавливаем роль игрока
                 return
             end
         end
