@@ -73,7 +73,7 @@ function checkPlayerRank(playerName)
     for role, players in pairs(rankdatabase) do
         for _, name in ipairs(players) do
             if name == playerName then
-                library.rank = role -- Устанавливаем роль игрока
+                library.rank = role
                 return
             end
         end
