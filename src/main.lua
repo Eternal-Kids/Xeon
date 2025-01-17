@@ -67,6 +67,7 @@ else
     
 end
 
+local rankdatabase = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/database.lua"))() 
 
 function checkPlayerRank(playerName)
     for role, players in pairs(rankdatabase) do
