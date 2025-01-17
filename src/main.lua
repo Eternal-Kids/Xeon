@@ -67,11 +67,6 @@ else
     
 end
 
-local rankdatabase = {
-    Dev = {"drrrxzov12"},
-    User = {"GOIDAZOV16", "GOIDAZOV18"}
-}
-
 
 function checkPlayerRank(playerName)
     for role, players in pairs(rankdatabase) do
