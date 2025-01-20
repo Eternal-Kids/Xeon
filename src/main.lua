@@ -4,7 +4,7 @@
     Sorry bungie#0001 i am just moded lib!
 ]]
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))() -- Ps by EKid: This is saved version of lib!
-local version = "1.25"
+local version = "1.251"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -69,7 +69,8 @@ end
 
 local rankdatabase = {
     Dev = {"drrrxzov13"},
-    User = {"GOIDAZOV16", "GOIDAZOV18"}
+    Premium = {},
+    Banned = {}
 }
 
 
@@ -77,7 +78,9 @@ function checkPlayerRank(playerName)
     for role, players in pairs(rankdatabase) do
         for _, name in ipairs(players) do
             if name == playerName then
-                library.rank = role -- Устанавливаем роль игрока
+                library.rank = role
+
+                if role == "Banned" then LocalPlayer:Kick("You banned") end
                 return
             end
         end
@@ -88,10 +91,8 @@ checkPlayerRank(LocalPlayer.name)
 
 local skinAcess = false
 if library.rank == "Dev" then
-    Notif:Notify("Now you dev", 3, "alert")
     skinAcess = true
-elseif library.rank == "User" then
-    Notif:Notify("You now user", 3, "alert")
+elseif library.rank == "Premium" then
     skinAcess = true
 end
 
@@ -405,7 +406,7 @@ SkinTab:NewLabel("Utility", "center")
 SkinTab:NewLabel("Skinchanger by ??? moded by EKid01", "left")
 SkinTab:NewLabel("Use skinlib by EKid01", "left")
 else
-SkinTab:NewLabel("Skinchanger allowed only users", "left")
+SkinTab:NewLabel("Skinchanger allowed only premium users", "left")
 end
 
 Notif:Notify("Xeon is loaded! Version "..version, 4, "success")
