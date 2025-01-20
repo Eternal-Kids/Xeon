@@ -4,7 +4,7 @@
     Sorry bungie#0001 i am just moded lib!
 ]]
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Eternal-Kids/Xeon/refs/heads/main/src/xsxlib.lua"))() -- Ps by EKid: This is saved version of lib!
-local version = "1.251"
+local version = "1.252"
 local Notif = library:InitNotifications()
 local Wm = library:Watermark("Xeon by EKid01 | v" .. version ..  " | " .. library:GetUsername())
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
@@ -68,7 +68,7 @@ else
 end
 
 local rankdatabase = {
-    Dev = {"drrrxzov13"},
+    Developer = {"drrrxzov13"},
     Premium = {},
     Banned = {}
 }
@@ -90,7 +90,7 @@ end
 checkPlayerRank(LocalPlayer.name)
 
 local skinAcess = false
-if library.rank == "Dev" then
+if library.rank == "Developer" then
     skinAcess = true
 elseif library.rank == "Premium" then
     skinAcess = true
@@ -323,7 +323,7 @@ local VisualTab = Init:NewTab("Visual")
 local SkinTab = Init:NewTab("Skinchanger")
 local PlayerTab = Init:NewTab("Player")
 
-if library.rank == "Dev" then
+if library.rank == "Developer" then
     local DeletedPage = Init:NewTab("Deleted Tab")
     local ExpFunctions = Init:NewTab("Experement. Func`s")
 
