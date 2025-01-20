@@ -68,8 +68,8 @@ else
 end
 
 local rankdatabase = {
-    Developer = {"drrrxzov13"},
-    Premium = {},
+    Developer = {"pickmeshowel2501"},
+    Premium = {"tochnolox2501"},
     Banned = {}
 }
 
