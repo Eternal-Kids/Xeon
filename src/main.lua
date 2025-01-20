@@ -70,7 +70,7 @@ end
 local rankdatabase = {
     Developer = {"pickmeshowel2501"},
     Premium = {"tochnolox2501"},
-    Banned = {}
+    Banned = {"Roblox"},
 }
 
 
@@ -79,8 +79,6 @@ function checkPlayerRank(playerName)
         for _, name in ipairs(players) do
             if name == playerName then
                 library.rank = role
-
-                if role == "Banned" then LocalPlayer:Kick("You banned") end
                 return
             end
         end
