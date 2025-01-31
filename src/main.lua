@@ -68,7 +68,7 @@ else
 end
 
 local rankdatabase = {
-    Developer = {"pickmeshowel2501"},
+    Developer = {"RivalsGP99"},
     Premium = {"tochnolox2501"},
     Banned = {"Roblox"},
 }
