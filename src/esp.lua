@@ -2,7 +2,7 @@
   Esp v3 by seere_v3
   Moded only config (v1.18)
   Changed tools (not realesed)
-]]
+]]--
 
 local runService = game:GetService('RunService')
 local coregui = game:GetService('CoreGui')
