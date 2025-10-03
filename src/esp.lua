@@ -3,6 +3,7 @@
   Moded only config (v1.18)
   Changed tools (not realesed)
 	GG
+	idk
 ]]--
 
 local runService = game:GetService('RunService')
