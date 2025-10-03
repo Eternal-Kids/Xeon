@@ -1,8 +1,5 @@
---[[
-    Xeon by EKid (discord: tinytosha)
-    Please dont fork whithout credit me
-    Sorry bungie#0001 i am just moded lib!
-]]--
+print("Xeon | By ekid")
+
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/depthso/XSX-UI-Library/refs/heads/main/xsx%20lib.lua"))() -- Ps by EKid: This is saved version of lib!
 local version = "1.253 (Skinchanger unlock)"
 local Notif = library:InitNotifications()
